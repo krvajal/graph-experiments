@@ -10,14 +10,15 @@ class PageRank {
 
   std::vector<float> pageRank_;
   std::vector<float> pageRankUpdated_;
-  float dumpFactor;
+  float damping_;
   UnweightedGraph g_;
 public:
-  PageRank(UnweightedGraph g)
+  PageRank(UnweightedGraph g, double damping = 0.85)
       : g_(g), pageRank_(g.V(), 1 / float(g.V())),
-        pageRankUpdated_(g.V()) {
+        pageRankUpdated_(g.V()),
+        damping_(damping) {
 
-    dumpFactor = 0.78;
+    damping_ = 0.78;
 
     for (int iter = 0; iter < 2; iter++) {
       iterate();
@@ -43,7 +44,7 @@ private:
       std::for_each(adj.begin(), adj.end(), [vv, &adj, this, &rank](int w) {
         rank += this->pageRank_[w];
       });
-      pageRankUpdated_[vv - 1] = (1 - dumpFactor) / numvert + dumpFactor * rank;
+      pageRankUpdated_[vv - 1] = (1 - damping_) / numvert + damping_ * rank;
     }
     pageRank_ = pageRankUpdated_;
   }
