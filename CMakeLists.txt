@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.6)
+project(pakgerank_serial)
+
+set(CMAKE_CXX_STANDARD 11)
+
+set(SOURCE_FILES main.cpp)
+add_executable(pakgerank_serial ${SOURCE_FILES})
