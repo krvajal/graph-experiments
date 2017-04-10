@@ -39,6 +39,7 @@ public:
     ulong w;
     while (inSStream >> w) {
       graph.addEdge(v, w);
+      graph.addEdge(w, v);
     }
 
   }
