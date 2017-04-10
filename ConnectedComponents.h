@@ -14,8 +14,8 @@ class ConnectedComponents {
   int count_;
 public:
   ConnectedComponents(UnweightedGraph g) :
-      marked_(g.V(), false), count_(0), id_(g.V()) {
-    for (ulong v = 0; v < g.V(); v++) {
+      marked_(g.V() + 1, false), count_(0), id_(g.V()) {
+    for (ulong v = 1; v <= g.V(); v++) {
       if (!marked_[v]) {
         dfs(g, v);
         count_++;
@@ -33,7 +33,7 @@ private:
     marked_[v] = true;
     id_[v] = count_;
 
-    for (auto w: g.adj(v + 1)) {
+    for (auto w: g.adj(v)) {
       if (!marked_[w]) {
         dfs(g, w);
       }
